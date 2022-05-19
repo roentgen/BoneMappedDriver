@@ -10,6 +10,7 @@ public class BoneMappedDriver : MonoBehaviour
         public GameObject Referer;
         public bool Absolute; 
         public bool Clamp; // whether a dp's clamped to positive [0.f - 1.f]
+        public bool Linear; // use an angle (uniformed to PI/2) linear correction  instead of dot
         public bool Additive; // Additive or Selective for list: All of unmasked ranges effect to final mesh. If not, last unmasked range in list only effects.
         private Animator Anim;
         private SkinnedMeshRenderer Mesh; 
@@ -29,6 +30,7 @@ public class BoneMappedDriver : MonoBehaviour
         {
                 Additive = true;
                 Clamp = true;
+                Linear = false;
                 DebugDraw = false;
         } 
 
@@ -85,6 +87,7 @@ public class BoneMappedDriver : MonoBehaviour
                 }
                 dot = Absolute ? Math.Abs(dot) : dot;
                 dot = Clamp ? Math.Max(Math.Min(dot, 1.0f), 0.0f) : dot;
+                dot = Linear ? (float)(Math.Acos(dot) / (Math.PI / 2.0)) : dot;
                 float e = 0.0f;
                 int last = -1;
                 for (var i = 0; i < BlendShapes.Length; i ++)
