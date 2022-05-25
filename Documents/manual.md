@@ -25,7 +25,7 @@
  You put additional bones to joint on your rig system. This bone shall be a reference.  And then, you add shape-keys or morphs (or else vertices animation) so that a mesh can be corrected and modified correspond with rotation angle between a reference and deforming bone.
  Keep your mind to remain references bone after exported.
 
- When you use Blender and AutoRig-Pro addon, select additional bones and press 'Set Custom Bones' 
+ When you use Blender and AutoRig-Pro addon, select additional bones and press 'Set Custom Bones'.
 
 [Set Custom Bones in Blender with AutoRig-Pro](img/set_custom_bones.png)
 
@@ -76,14 +76,21 @@
  A forearm rotation causes shrinking around a joint because game engines usualy don't use dual-quaternion skinning.
  Let's correct this using this component.
  There is sample prefab, Examples/rigged_sample.prefab that already set up.  You can rotate forearm by 'forearm_stretch.r', this component calcs an angle between 'forearm_stretch.r' and reference, 'c_arm_stretch_rotated_01.r'.
-Unpack this prefab and disable this component, then pelase check its behaviour out.
+ Unpack this prefab and disable this component, then pelase check its behaviour out.
 
- First image is one that be deformed normally. Second image is one that be corrected by this component. You can see 
+ Bellow an image shows selected arm has slightly muscle. There are two arms; one gets Bone Mapped Driver activated, and another does not.
 
+[muscle on upper arm](img/muscle_sample.png)
 
 ### Clothing correction with legs
 
+ Examples/rigged_sample2.prefab shows around of a leg that wears skinny outfit. When you rotate left leg, you can see that outfit gets a bending by leg's bone but its volume would be preserved.
+
+[preserving volume/length of outfit](img/clothing_sample.png)
 
  Make sure that leg's Reference bone does not rotate with upper leg's rotation.
  Unfortunately, AutoRig's exorted bones may has different relationship in Blender. A reference bone which you see as an ascendant of upper leg in blender but it's descendant of upper leg in unity means that an upper leg's rotation affects to its reference bone.
  In this case you can unpack a prefab and let us revise their relationship. Below figure shows it be revised to upper leg's rotation do not affect its reference.
+
+[Re-parenting for rotate reference](img/upperleg_reference.png)
+
